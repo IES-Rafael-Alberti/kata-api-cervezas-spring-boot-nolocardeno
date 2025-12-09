@@ -1,0 +1,263 @@
+{
+	"info": {
+		"_postman_id": "api-cervezas-collection",
+		"name": "API Cervezas - Kata Spring Boot",
+		"description": "Colección de peticiones para probar la API de Cervezas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8080"
+		}
+	],
+	"item": [
+		{
+			"name": "Cervezas",
+			"item": [
+				{
+					"name": "Listar todas las cervezas",
+					"request": {
+						"method": "GET",
+						"url": "{{base_url}}/beers"
+					}
+				},
+				{
+					"name": "Listar cervezas paginadas",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/beers/paginated?page=0&size=10&sort=name,asc",
+							"host": ["{{base_url}}"],
+							"path": ["beers", "paginated"],
+							"query": [
+								{"key": "page", "value": "0"},
+								{"key": "size", "value": "10"},
+								{"key": "sort", "value": "name,asc"}
+							]
+						}
+					}
+				},
+				{
+					"name": "Conteo de cervezas (HEAD)",
+					"request": {
+						"method": "HEAD",
+						"url": "{{base_url}}/beers"
+					}
+				},
+				{
+					"name": "Obtener cerveza por ID",
+					"request": {
+						"method": "GET",
+						"url": "{{base_url}}/beer/1"
+					}
+				},
+				{
+					"name": "Crear nueva cerveza",
+					"request": {
+						"method": "POST",
+						"url": "{{base_url}}/beer",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Cerveza de Prueba\",\n  \"breweryId\": 1,\n  \"catId\": 1,\n  \"styleId\": 1,\n  \"abv\": 5.5,\n  \"ibu\": 35,\n  \"srm\": 12,\n  \"descript\": \"Una cerveza artesanal de prueba\"\n}"
+						}
+					}
+				},
+				{
+					"name": "Actualizar cerveza (PUT)",
+					"request": {
+						"method": "PUT",
+						"url": "{{base_url}}/beer/1",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Cerveza Actualizada\",\n  \"breweryId\": 1,\n  \"catId\": 2,\n  \"styleId\": 3,\n  \"abv\": 6.0,\n  \"ibu\": 40,\n  \"srm\": 15,\n  \"descript\": \"Descripción actualizada completamente\"\n}"
+						}
+					}
+				},
+				{
+					"name": "Actualizar cerveza parcialmente (PATCH)",
+					"request": {
+						"method": "PATCH",
+						"url": "{{base_url}}/beer/1",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"abv\": 7.0,\n  \"descript\": \"Solo actualizo estos campos\"\n}"
+						}
+					}
+				},
+				{
+					"name": "Eliminar cerveza",
+					"request": {
+						"method": "DELETE",
+						"url": "{{base_url}}/beer/5916"
+					}
+				},
+				{
+					"name": "Subir imagen de cerveza",
+					"request": {
+						"method": "POST",
+						"url": "{{base_url}}/beer/1/image",
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": ""
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Obtener imagen de cerveza",
+					"request": {
+						"method": "GET",
+						"url": "{{base_url}}/beer/1/image"
+					}
+				}
+			]
+		},
+		{
+			"name": "Cerveceras",
+			"item": [
+				{
+					"name": "Listar todas las cerveceras",
+					"request": {
+						"method": "GET",
+						"url": "{{base_url}}/breweries"
+					}
+				},
+				{
+					"name": "Listar cerveceras paginadas",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/breweries/paginated?page=0&size=10",
+							"host": ["{{base_url}}"],
+							"path": ["breweries", "paginated"],
+							"query": [
+								{"key": "page", "value": "0"},
+								{"key": "size", "value": "10"}
+							]
+						}
+					}
+				},
+				{
+					"name": "Conteo de cerveceras (HEAD)",
+					"request": {
+						"method": "HEAD",
+						"url": "{{base_url}}/breweries"
+					}
+				},
+				{
+					"name": "Obtener cervecera por ID",
+					"request": {
+						"method": "GET",
+						"url": "{{base_url}}/brewerie/1"
+					}
+				}
+			]
+		},
+		{
+			"name": "Categorías",
+			"item": [
+				{
+					"name": "Listar todas las categorías",
+					"request": {
+						"method": "GET",
+						"url": "{{base_url}}/categories"
+					}
+				},
+				{
+					"name": "Listar categorías paginadas",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/categories/paginated?page=0&size=10",
+							"host": ["{{base_url}}"],
+							"path": ["categories", "paginated"],
+							"query": [
+								{"key": "page", "value": "0"},
+								{"key": "size", "value": "10"}
+							]
+						}
+					}
+				},
+				{
+					"name": "Conteo de categorías (HEAD)",
+					"request": {
+						"method": "HEAD",
+						"url": "{{base_url}}/categories"
+					}
+				},
+				{
+					"name": "Obtener categoría por ID",
+					"request": {
+						"method": "GET",
+						"url": "{{base_url}}/categorie/1"
+					}
+				}
+			]
+		},
+		{
+			"name": "Estilos",
+			"item": [
+				{
+					"name": "Listar todos los estilos",
+					"request": {
+						"method": "GET",
+						"url": "{{base_url}}/styles"
+					}
+				},
+				{
+					"name": "Listar estilos paginados",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/styles/paginated?page=0&size=10",
+							"host": ["{{base_url}}"],
+							"path": ["styles", "paginated"],
+							"query": [
+								{"key": "page", "value": "0"},
+								{"key": "size", "value": "10"}
+							]
+						}
+					}
+				},
+				{
+					"name": "Conteo de estilos (HEAD)",
+					"request": {
+						"method": "HEAD",
+						"url": "{{base_url}}/styles"
+					}
+				},
+				{
+					"name": "Obtener estilo por ID",
+					"request": {
+						"method": "GET",
+						"url": "{{base_url}}/style/1"
+					}
+				}
+			]
+		}
+	]
+}
