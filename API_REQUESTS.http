@@ -1,0 +1,292 @@
+# API de Cervezas - Peticiones de Prueba
+# Archivo para usar con httpie, curl o importar en Postman/Insomnia
+# Base URL: http://localhost:8080
+
+# ==============================================================================
+# CERVEZAS (BEERS)
+# ==============================================================================
+
+# --- GET: Listar todas las cervezas ---
+# httpie:
+http GET http://localhost:8080/beers
+
+# curl:
+curl -X GET http://localhost:8080/beers
+
+# ---
+
+# --- GET: Listar cervezas paginadas ---
+# httpie:
+http GET "http://localhost:8080/beers/paginated?page=0&size=10&sort=name,asc"
+
+# curl:
+curl -X GET "http://localhost:8080/beers/paginated?page=0&size=10&sort=name,asc"
+
+# ---
+
+# --- HEAD: Obtener conteo total de cervezas ---
+# httpie:
+http HEAD http://localhost:8080/beers
+
+# curl:
+curl -I http://localhost:8080/beers
+
+# ---
+
+# --- GET: Obtener cerveza por ID ---
+# httpie:
+http GET http://localhost:8080/beer/1
+
+# curl:
+curl -X GET http://localhost:8080/beer/1
+
+# ---
+
+# --- POST: Crear nueva cerveza ---
+# httpie:
+http POST http://localhost:8080/beer \
+  name="Cerveza de Prueba" \
+  breweryId:=1 \
+  catId:=1 \
+  styleId:=1 \
+  abv:=5.5 \
+  ibu:=35 \
+  srm:=12 \
+  descript="Una cerveza artesanal de prueba"
+
+# curl:
+curl -X POST http://localhost:8080/beer \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Cerveza de Prueba",
+    "breweryId": 1,
+    "catId": 1,
+    "styleId": 1,
+    "abv": 5.5,
+    "ibu": 35,
+    "srm": 12,
+    "descript": "Una cerveza artesanal de prueba"
+  }'
+
+# ---
+
+# --- PUT: Actualizar cerveza completamente ---
+# httpie:
+http PUT http://localhost:8080/beer/1 \
+  name="Cerveza Actualizada" \
+  breweryId:=1 \
+  catId:=2 \
+  styleId:=3 \
+  abv:=6.0 \
+  ibu:=40 \
+  srm:=15 \
+  descript="Descripción actualizada"
+
+# curl:
+curl -X PUT http://localhost:8080/beer/1 \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Cerveza Actualizada",
+    "breweryId": 1,
+    "catId": 2,
+    "styleId": 3,
+    "abv": 6.0,
+    "ibu": 40,
+    "srm": 15,
+    "descript": "Descripción actualizada"
+  }'
+
+# ---
+
+# --- PATCH: Actualizar cerveza parcialmente ---
+# httpie:
+http PATCH http://localhost:8080/beer/1 \
+  abv:=7.0 \
+  descript="Solo actualizo estos campos"
+
+# curl:
+curl -X PATCH http://localhost:8080/beer/1 \
+  -H "Content-Type: application/json" \
+  -d '{
+    "abv": 7.0,
+    "descript": "Solo actualizo estos campos"
+  }'
+
+# ---
+
+# --- DELETE: Eliminar cerveza ---
+# httpie:
+http DELETE http://localhost:8080/beer/5916
+
+# curl:
+curl -X DELETE http://localhost:8080/beer/5916
+
+# ---
+
+# --- POST: Subir imagen de cerveza ---
+# httpie:
+http -f POST http://localhost:8080/beer/1/image file@/ruta/a/imagen.jpg
+
+# curl:
+curl -X POST http://localhost:8080/beer/1/image \
+  -F "file=@/ruta/a/imagen.jpg"
+
+# ---
+
+# --- GET: Obtener imagen de cerveza ---
+# httpie:
+http GET http://localhost:8080/beer/1/image --download
+
+# curl:
+curl -X GET http://localhost:8080/beer/1/image -o imagen_cerveza.jpg
+
+# ---
+
+# ==============================================================================
+# CERVECERAS (BREWERIES)
+# ==============================================================================
+
+# --- GET: Listar todas las cerveceras ---
+# httpie:
+http GET http://localhost:8080/breweries
+
+# curl:
+curl -X GET http://localhost:8080/breweries
+
+# ---
+
+# --- GET: Listar cerveceras paginadas ---
+# httpie:
+http GET "http://localhost:8080/breweries/paginated?page=0&size=10"
+
+# curl:
+curl -X GET "http://localhost:8080/breweries/paginated?page=0&size=10"
+
+# ---
+
+# --- HEAD: Obtener conteo total de cerveceras ---
+# httpie:
+http HEAD http://localhost:8080/breweries
+
+# curl:
+curl -I http://localhost:8080/breweries
+
+# ---
+
+# --- GET: Obtener cervecera por ID ---
+# httpie:
+http GET http://localhost:8080/brewerie/1
+
+# curl:
+curl -X GET http://localhost:8080/brewerie/1
+
+# ---
+
+# ==============================================================================
+# CATEGORÍAS (CATEGORIES)
+# ==============================================================================
+
+# --- GET: Listar todas las categorías ---
+# httpie:
+http GET http://localhost:8080/categories
+
+# curl:
+curl -X GET http://localhost:8080/categories
+
+# ---
+
+# --- GET: Listar categorías paginadas ---
+# httpie:
+http GET "http://localhost:8080/categories/paginated?page=0&size=10"
+
+# curl:
+curl -X GET "http://localhost:8080/categories/paginated?page=0&size=10"
+
+# ---
+
+# --- HEAD: Obtener conteo total de categorías ---
+# httpie:
+http HEAD http://localhost:8080/categories
+
+# curl:
+curl -I http://localhost:8080/categories
+
+# ---
+
+# --- GET: Obtener categoría por ID ---
+# httpie:
+http GET http://localhost:8080/categorie/1
+
+# curl:
+curl -X GET http://localhost:8080/categorie/1
+
+# ---
+
+# ==============================================================================
+# ESTILOS (STYLES)
+# ==============================================================================
+
+# --- GET: Listar todos los estilos ---
+# httpie:
+http GET http://localhost:8080/styles
+
+# curl:
+curl -X GET http://localhost:8080/styles
+
+# ---
+
+# --- GET: Listar estilos paginados ---
+# httpie:
+http GET "http://localhost:8080/styles/paginated?page=0&size=10"
+
+# curl:
+curl -X GET "http://localhost:8080/styles/paginated?page=0&size=10"
+
+# ---
+
+# --- HEAD: Obtener conteo total de estilos ---
+# httpie:
+http HEAD http://localhost:8080/styles
+
+# curl:
+curl -I http://localhost:8080/styles
+
+# ---
+
+# --- GET: Obtener estilo por ID ---
+# httpie:
+http GET http://localhost:8080/style/1
+
+# curl:
+curl -X GET http://localhost:8080/style/1
+
+# ---
+
+# ==============================================================================
+# SWAGGER / OPENAPI
+# ==============================================================================
+
+# --- GET: Documentación OpenAPI en JSON ---
+# httpie:
+http GET http://localhost:8080/api-docs
+
+# curl:
+curl -X GET http://localhost:8080/api-docs
+
+# --- Swagger UI ---
+# Abrir en navegador: http://localhost:8080/swagger-ui.html
+
+# ==============================================================================
+# NOTAS
+# ==============================================================================
+# 
+# Para usar httpie, instalar con: pip install httpie
+# Para usar curl, ya viene instalado en la mayoría de sistemas Unix
+# 
+# Para Postman/Insomnia, crear una colección con los endpoints anteriores
+# y configurar la variable base_url = http://localhost:8080
+#
+# Ejemplos de paginación:
+# - page: número de página (empieza en 0)
+# - size: cantidad de elementos por página
+# - sort: campo,dirección (ej: name,asc o id,desc)
